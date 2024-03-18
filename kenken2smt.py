@@ -48,7 +48,6 @@ def output_file(rule_dict, num_rows = 7, num_cols = 7):
     # footer of file
     print_footer(variables)
     
-
 def kenken2smt():
     # Read in the input file, also removing whitespace, to get the sudoku puzzle 2D array
     input = sys.stdin.read().strip()
