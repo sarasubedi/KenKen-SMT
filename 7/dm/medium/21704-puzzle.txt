@@ -1,0 +1,8 @@
+#kenken www.kenkenpuzzle.com Puzzle 21704 7x7 Medium
+r1.980*,r2.1080*,r2,r2,r2,r3.2/,r3
+r1,r1,r1,r2,r4.840*,r5.12*,r5
+r6.126*,r6,r2,r2,r4,r4,r5
+r7.480*,r6,r6,r8.3/,r8,r4,r9.42*
+r7,r7,r10.150*,r10,r10,r9,r9
+r11.24*,r7,r7,r12.1,r10,r13.588*,r14.15*
+r11,r11,r11,r13,r13,r13,r14
