@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import sys
 import re
-import itertools
 
 def print_header(variables, num_rows = 7, num_cols = 7):
     # same for every num_rows x num_cols kenken (defult is 7x7)
