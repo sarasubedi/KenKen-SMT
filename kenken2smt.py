@@ -52,16 +52,20 @@ def output_file(rule_dict, num_rows = 7, num_cols = 7):
 def kenken2smt():
     # Read in the input file, also removing whitespace, to get the sudoku puzzle 2D array
     input = sys.stdin.read().strip()
-    # print(input)
+    # use regex to extract each rule
     rule_pat = r"r\d+\.\d+[^,]?"
     rules = [match for line in input.split('\n') for match in re.findall(rule_pat, line)]
+    
+    # use regex to extract which rule applies to which boxes
     grid_pat = r"r\d+"
     grid = [re.findall(grid_pat, line) for line in input.split('\n')[1:]]
+    
+    # get rows and columns
     num_cols = len(grid)
     num_rows = len(grid[0])
-    # for g in grid:
-    #     print(g)
-    # print(rules)
+
+    # the rule dictionary holds the the expected output, operator and 
+    # values involved
     rule_dict = {}
     for r in rules:
         temp = r.split('.')
@@ -72,11 +76,14 @@ def kenken2smt():
             op = '='
         rule_dict[rule_name] = (num, op, [])
 
+    # this collects all of the grid locations that the rule applies to
     for n, line in enumerate(grid):
         for i in range(len(line)):
             rule_dict[line[i]][2].append(n*num_cols+i)
 
-    print(rule_dict)
+    # print(rule_dict)
+            
+    # outputs a file ready to be put in the sat solver
     output_file(rule_dict, num_rows, num_cols)
 
 if __name__ == "__main__":
