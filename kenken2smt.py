@@ -10,7 +10,7 @@ def print_header(variables, num_rows = 7, num_cols = 7):
     # declare all of the variables in the kenken grid
     print("\n".join([f"(declare-const {n} Int)" for n in variables]))
     # bind all variables from 0-6
-    print("\n".join([f"(assert (and (> {n} 0) (< {n} {num_cols})))" for n in variables]))
+    print("\n".join([f"(assert (and (> {n} 0) (< {n} {num_cols+1})))" for n in variables]))
     # make sure each row has different values
     for i in range(num_rows):
         row = variables[i * num_cols: (i + 1) * num_cols]
