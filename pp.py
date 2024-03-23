@@ -5,12 +5,16 @@ import re
 
 dat_patt = re.compile(r",\"data\":\"(.*)\",\"size")
 
-def pretty_print_puzzle(json_data):
+def pretty_print_puzzle(json_data, solved):
     #print(json_data)
     A, T, S, V, H = re.split('A|T|S|V|H', json_data)[1:] #drop the initial blank
 
     # Convert strings into lists of lists
-    A = [[int(num) for num in row.split()] for row in A.strip().split('\n')]
+    if not solved:
+        A = [[-1 for num in row.split()] for row in A.strip().split('\n')]
+    else:
+        A = [[int(num) for num in row.split()] for row in A.strip().split('\n')]
+    
     T = [[int(num) for num in row.split()] for row in T.strip().split('\n')]
     S = [[sym for sym in row.split()] for row in S.strip().split('\n')]
     V = [[int(num) for num in row.split()] for row in V.strip().split('\n')]
@@ -49,7 +53,10 @@ def pretty_print_puzzle(json_data):
         
         #Print out numbers in that row
         for column in range(size):
-            print(" ", A[row][column], end="  ")
+            if A[row][column] != -1:
+                print(" ", A[row][column], end="  ")
+            else:
+                print("     ", end="")
 
             if column == size-1 or V[row][column] == 1:
                 print("|", end="")
@@ -71,4 +78,8 @@ if __name__ == "__main__":
     
     dat = dat_patt.search(json_data)
     if dat:
-        pretty_print_puzzle(dat.group(1).replace("\\r\\n", "\n"))
+        print("Unsolved puzzle:")
+        pretty_print_puzzle(dat.group(1).replace("\\r\\n", "\n"), False)
+        
+        print("\n\nSolved puzzle:")
+        pretty_print_puzzle(dat.group(1).replace("\\r\\n", "\n"), True)
