@@ -1,8 +1,13 @@
-import json
+#!/usr/bin/env python3
+
+import os
+import re
+
+dat_patt = re.compile(r",\"data\":\"(.*)\",")
 
 def pretty_print_puzzle(json_data):
-    puzzle_data = json.loads(json_data)['data']
-    A, T, S, V, H = puzzle_data.split()
+    #puzzle_data = json.loads(json_data)['data']
+    A, T, S, V, H = json_data.split()
 
     # Convert strings into lists of lists
     A = [[int(num) for num in row.split()] for row in A.strip().split('\n')]
@@ -43,11 +48,13 @@ def pretty_print_puzzle(json_data):
                 print(' ', end=' ')
         print()
 
-# Example usage:
-json_data = '''
-{
-  "data": "1 3 0 4 0\n0 2 0 0 0\n0 0 2 0 0\n0 0 0 0 0\n0 0 0 0 0\n\n0 0 0 0 0\n0 0 4 0 0\n0 0 0 0 0\n0 0 0 3 0\n0 0 0 0 0\n\n+ 0 + 0 +\n0 0 0 0 0\n+ 0 + 0 +\n0 0 0 0 0\n+ 0 + 0 +\n\n0 0 0 0\n0 0 0 0\n0 0 0 0\n0 0 0 0\n\n0 0 0\n0 0 0\n0 0 0\n0 0 0\n0 0 0\n0 0 0\n"
-}
-'''
 
-pretty_print_puzzle(json_data)
+if __name__ == "__main__":
+    puz_id = input("Enter PuzzleID: ")
+    json_data = os.popen(f"./fetch.sh {puz_id}").read()
+    #json_data = os.system(f"./fetch.sh {puz_id}")
+
+    #"data":"1 3 0 4 0\n0 2 0 0 0\n0 0 2 0 0\n0 0 0 0 0\n0 0 0 0 0\n\n0 0 0 0 0\n0 0 4 0 0\n0 0 0 0 0\n0 0 0 3 0\n0 0 0 0 0\n\n+ 0 + 0 +\n0 0 0 0 0\n+ 0 + 0 +\n0 0 0 0 0\n+ 0 + 0 +\n\n0 0 0 0\n0 0 0 0\n0 0 0 0\n0 0 0 0\n\n0 0 0\n0 0 0\n0 0 0\n0 0 0\n0 0 0\n0 0 0\n"
+    dat = dat_patt.search(json_data)
+    if dat:
+        pretty_print_puzzle(dat.group(1))
