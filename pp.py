@@ -3,7 +3,7 @@
 import os
 import re
 
-dat_patt = re.compile(r",\"data\":\"(.*)\",")
+dat_patt = re.compile(r",\"data\":\"(.*)\",\"size")
 
 def pretty_print_puzzle(json_data):
     #puzzle_data = json.loads(json_data)['data']
@@ -57,4 +57,5 @@ if __name__ == "__main__":
     #"data":"1 3 0 4 0\n0 2 0 0 0\n0 0 2 0 0\n0 0 0 0 0\n0 0 0 0 0\n\n0 0 0 0 0\n0 0 4 0 0\n0 0 0 0 0\n0 0 0 3 0\n0 0 0 0 0\n\n+ 0 + 0 +\n0 0 0 0 0\n+ 0 + 0 +\n0 0 0 0 0\n+ 0 + 0 +\n\n0 0 0 0\n0 0 0 0\n0 0 0 0\n0 0 0 0\n\n0 0 0\n0 0 0\n0 0 0\n0 0 0\n0 0 0\n0 0 0\n"
     dat = dat_patt.search(json_data)
     if dat:
-        pretty_print_puzzle(dat.group(1))
+        print(dat.group(1).replace("\\r\\n", "\r\n"))
+        pretty_print_puzzle(dat.group(1).replace("\\r\\n", "\r\n"))
