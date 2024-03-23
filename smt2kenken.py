@@ -3,7 +3,6 @@ import sys
 import re
 
 def smt2kenken():
-    # Read in the input file, also removing whitespace, to get the sudoku puzzle 2D array
     input = sys.stdin.read().split('\n')
     
     solution = ""
