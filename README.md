@@ -11,12 +11,14 @@ In this project, we have developed a program to translate partially solved KenKe
 
 ## How to Use
 
+We have attached the `fetch.sh` file with the project submission. Please ensure that `fetch.sh` and all the `.py` scripts are executable before running the following commands. 
+
 ### STEP 1. kenken2smt.py
 This file contains functions to convert KenKen puzzles into SMT-LIB format. It includes functions to print the header and footer of the SMT-LIB file, as well as to generate the main content based on the given puzzle rules.
 
 #### Usage:
 ```bash
-python3 ./kenken2smt.py <puzzle.txt >puzzle.smt
+./kenken2smt.py <puzzle.txt >puzzle.smt
 ```
 
 NOTE: Please ensure the input `puzzle.txt` file is in the following format:
@@ -37,7 +39,7 @@ This file contains functions to convert SMT-LIB format solutions into KenKen puz
 #### Usage:
 ```bash
 mathsat <puzzle.smt >model.smt
-python3 ./smt2kenken.py <model.smt >solution.txt
+./smt2kenken.py <model.smt >solution.txt
 cat solution.txt
 ```
 
@@ -46,13 +48,13 @@ This file contains functions to pretty print KenKen puzzles and solutions. It in
 
 #### Usage:
 ```bash
-python3 ./pp.py
+./pp.py
 <puzzle ID>
 ```
 
 Example:
 ```bash
-python3 ./pp.py
+./pp.py
 21995
 ```
 
